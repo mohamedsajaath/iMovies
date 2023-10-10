@@ -5,7 +5,7 @@
                 <a href="{{ route('home') }}"><img src="{{ asset('assets/img/logo.png') }}" alt="logo" /></a>
             </div>
             <div class="header-right">
-                <form action="#">
+                <form action="#" style="visibility: hidden;">
                     <select>
                         <option value="Movies">Movies</option>
                         <option value="Movies">Movies</option>
@@ -15,15 +15,8 @@
                     <button><i class="icofont icofont-search"></i></button>
                 </form>
                 <ul>
-                    @if (Route::has('login'))
-                        @auth
-                            <li><a class="login-popup" href="{{ url('/dashboard') }}">Dashboard</a></li>
-                        @else
-                            <li><a class="login-popup" href="{{ route('login') }}">{{ Auth::user->name }}</a></li>
-                        @endauth
-
-                    @endif
-
+                    <li><a href="#">Welcome Guest!</a></li>
+                    <li><a  href="{{ route('login') }}">Login</a></li>
                 </ul>
             </div>
             <div class="menu-area">
@@ -33,9 +26,7 @@
                         <li><a class="active" href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('home') }}">Movies</a></li>
                         <li><a href="{{ route('home') }}">Top Movies</a></li>
-                        <li><a href="{{ route('home') }}">News</a></li>
-
-                    </ul>
+                       </ul>
                 </div>
             </div>
         </div>

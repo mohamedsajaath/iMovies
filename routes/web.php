@@ -16,11 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/movies', function () {
+    return view('movies');
+})->middleware(['auth', 'verified'])->name('movies');
+
+Route::get('/comments', function () {
+    return view('comments');
+})->middleware(['auth', 'verified'])->name('comments');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

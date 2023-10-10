@@ -11,4 +11,4 @@
 <!-- Isotope JS -->
 <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
 <!-- main JS -->
-<script src="{{ asset('assets/img/favcion.png') }}assets/js/main.js"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
