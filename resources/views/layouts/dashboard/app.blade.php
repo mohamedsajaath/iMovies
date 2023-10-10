@@ -22,5 +22,6 @@
     <i class="fas fa-angle-up"></i>
 </a>
 @include('layouts.dashboard.scripts')
+@stack('script')
 </body>
 </html>

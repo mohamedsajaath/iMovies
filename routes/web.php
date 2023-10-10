@@ -22,9 +22,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/movies', function () {
-    return view('movies');
+Route::get('/movies', [\App\Http\Controllers\MovieController::class,'index'])->middleware(['auth', 'verified'])->name('movies');
+
+Route::group(['prefix'=>'admin'], function(){
+    Route::get('/movies/view/{id}', [\App\Http\Controllers\MovieController::class,'getById'])->name('admin_view_movie');
+    Route::post('/movies/create', [\App\Http\Controllers\MovieController::class,'createMovie'])->name('admin_create_movie');
 })->middleware(['auth', 'verified'])->name('movies');
+
+
 
 Route::get('/comments', function () {
     return view('comments');

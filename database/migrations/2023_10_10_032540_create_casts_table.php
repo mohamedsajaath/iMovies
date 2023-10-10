@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('casts', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('image');
-            $table->text('link');
+            $table->string('name');
+            $table->string('image');
             $table->foreignId('movie_id');
             $table->timestamps();
         });
