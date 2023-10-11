@@ -170,12 +170,35 @@
             })
 
             // CREATE MOVIE
-            $("#create_movie").submit(function (event) {
+            $(document).on("submit","#create_movie",function (event) {
                 event.preventDefault();
                 let formData = new FormData(this);
                 $.ajax({
                     type: "POST",
                     url: "{{ route('admin_create_movie') }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log("Response from server: " + response);
+                        location.reload()
+                        alertMessage("Success", "s");
+                    },
+                    error: function (jqXHR, error) {
+                        console.error(jqXHR.responseJSON.message);
+
+                        alertMessage(jqXHR.responseJSON.message, "f");
+                    }
+                });
+            });
+
+            // CREATE MOVIE
+            $(document).on("submit","#edit_movie",function (event) {
+                event.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('admin_edit_movie') }}",
                     data: formData,
                     processData: false,
                     contentType: false,
