@@ -13,7 +13,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = MovieService::getAllMovies();
-        return view('movies')->with(["movies" => $movies]);
+        return view('admin.movies')->with(["movies" => $movies]);
     }
 
     public function getById($id)
@@ -25,12 +25,34 @@ class MovieController extends Controller
 
     public function createMovie(MovieRequest $movieRequest)
     {
-
         $movieObj = MovieDTO::getFromWebForm($movieRequest);
         $response = MovieService::creatMovie($movieObj);
 
         CastController::create($movieRequest,$response[1]);
         return ["response" => $response];
+    }
+
+    public function deleteById($id){
+        $response = MovieService::deleteById($id);
+
+        return ["response" => $response];
+    }
+
+    public function getEditModal($id){
+
+        $movie = MovieService::getMovieWithCasts($id);
+        return view("modal.movie_edit_modal")
+            ->with(['movie' => $movie]);
+
+    }
+
+    public function editMovie(MovieRequest $movieRequest){
+        $movieObj = MovieDTO::getFromWebForm($movieRequest);
+        $response = MovieService::updateMovie($movieObj);
+
+        CastController::update($movieRequest,$movieRequest->id);
+        $movies = MovieService::getAllMovies();
+        return view('admin.movies')->with(["movies" => $movies]);
     }
 }
 

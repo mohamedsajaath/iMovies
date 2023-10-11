@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Movie extends Model
 {
     use HasFactory;
+    const StoragePath = "public/movie";
 
     protected $fillable = [
         'name',
@@ -22,9 +23,11 @@ class Movie extends Model
         'thumbnail_image',
         'poster_image',
         'top_section',
-        'coming_soon'
+        'coming_soon',
+        'director',
+        'writer'
     ];
-    const StoragePath = "storage/movie";
+
 
 
     public function casts():HasMany

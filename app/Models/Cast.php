@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Cast extends Model
 {
     use HasFactory;
+
+    const StoragePath = "public/cast";
     protected $fillable = [
         'name',
         'image',

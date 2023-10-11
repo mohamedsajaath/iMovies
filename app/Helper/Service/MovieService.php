@@ -21,18 +21,20 @@ class MovieService
     {
         try {
             $movieObj->save();
-            return ["success",$movieObj->id];
+            return ["success", $movieObj->id];
         } catch (\Exception $err) {
-            return ["error",$err];
+            return ["error", $err];
         }
 
     }
 
-    public static function getTopMovies(){
-        return Movie::query()->orderBy('rating','asc')->get();
+    public static function getTopMovies()
+    {
+        return Movie::query()->orderBy('rating', 'asc')->get();
     }
 
-    public static function getAllMoviesWithCasts(){
+    public static function getAllMoviesWithCasts()
+    {
 
         $movies = Movie::query()->get();
         foreach ($movies as $movie) {
@@ -40,5 +42,37 @@ class MovieService
         }
         return $movies;
 
+    }
+
+    public static function getMovieWithCasts($id)
+    {
+        $movie = Movie::query()->where("id", "=", $id)->get();
+        $movie[0]->casts;
+        return $movie[0];
+
+    }
+
+    public static function deleteById($id)
+    {
+        try {
+            Movie::query()->where("id", "=", $id)->delete();
+            return ["success"];
+        } catch (\Exception $err) {
+            return ["error", $err];
+        }
+    }
+
+    public static function updateMovie($movieObj){
+
+        try {
+            $movieObj->update();
+            return ["success", $movieObj->id];
+        } catch (\Exception $err) {
+            return ["error", $err];
+        }
+    }
+
+    public static function getAllCount(){
+        return Movie::all()->count();
     }
 }

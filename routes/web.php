@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,30 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class,'home'])->name('home');
-Route::get('/home/movies', [\App\Http\Controllers\HomeController::class,'movies'])->name('home_movies');
-Route::get('/home/movies/view/{id}', [\App\Http\Controllers\HomeController::class,'movieView'])->name('home_movies_view');
-Route::get('/home/top-movies', [\App\Http\Controllers\HomeController::class,'top_movies'])->name('home_top_movies');
+Route::get('/', [HomeController::class,'home'])->name('home');
+Route::get('/home/movies', [HomeController::class,'movies'])->name('home_movies');
+Route::get('/home/movies/view/{id}', [HomeController::class,'movieView'])->name('home_movies_view');
+Route::get('/home/top-movies', [HomeController::class,'top_movies'])->name('home_top_movies');
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
 
-Route::get('/movies', [\App\Http\Controllers\MovieController::class,'index'])->middleware(['auth', 'verified'])->name('movies');
+Route::get('/movies', [MovieController::class,'index'])->middleware(['auth', 'verified'])->name('movies');
 Route::group(['prefix'=>'admin'], function(){
-    Route::get('/movies/view/{id}', [\App\Http\Controllers\MovieController::class,'getById'])->name('admin_view_movie');
-    Route::post('/movies/create', [\App\Http\Controllers\MovieController::class,'createMovie'])->name('admin_create_movie');
+    Route::get('/movies/view/{id}', [MovieController::class,'getById'])->name('admin_view_movie');
+    Route::get('/movies/delete/{id}', [MovieController::class,'deleteById'])->name('admin_delete_movie');
+    Route::get('/movies/modal/edit/{id}', [MovieController::class,'getEditModal'])->name('admin_edit_movie_modal');
+
+    Route::post('/movies/edit', [MovieController::class,'editMovie'])->name('admin_edit_movie');
+    Route::post('/movies/create', [MovieController::class,'createMovie'])->name('admin_create_movie');
 })->middleware(['auth', 'verified'])->name('movies');
 
 
 
 Route::get('/comments', function () {
-    return view('comments');
+    return view('admin.comments');
 })->middleware(['auth', 'verified'])->name('comments');
 
 Route::middleware('auth')->group(function () {
