@@ -10,7 +10,7 @@
                         <div class="row hero-area-slide">
                             <div class="col-lg-6 col-md-5">
                                 <div class="hero-area-content">
-                                    <img src="{{ asset($movie->thumbnail) }}" alt="about"/>
+                                    <img src="{{ asset($movie->thumbnail_image) }}" alt="about"/>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-7">
@@ -25,7 +25,7 @@
                                         </div>
                                         <h4>{{ $movie->rating }} Comments</h4>
                                     </div>
-                                    <p>{!!  substr($movie->description, 0, 200) !!}....</p>
+                                    <p>{{ substr($movie->description, 0, 200) }}....</p>
                                     <h3>Cast:</h3>
                                     <div class="slide-cast">
                                         @foreach($movie->casts as $cast)
@@ -34,120 +34,22 @@
                                             </div>
                                         @endforeach
 
-
-                                        <div class="single-slide-cast text-center">
-                                            5+
-                                        </div>
                                     </div>
-                                    <div class="slide-trailor mb-5">
-                                        <a class="theme-btn theme-btn2" href="{{ Url('/home/movies/view/'.$movie->id) }}">
-                                            Read More...</a>
+                                    <div class="single-slide-cast text-center">
+                                        5+
                                     </div>
+                                </div>
+                                <div class="slide-trailor mb-5">
+                                    <a class="theme-btn theme-btn2"
+                                       href="{{ Url('/home/movies/view/'.$movie->id) }}">
+                                        Read More...</a>
                                 </div>
                             </div>
                         </div>
                     @endif
                 @endforeach
-
             </div>
-            <div class="hero-area-thumb">
-                <div class="thumb-prev">
-                    @foreach($movies as $index => $movie)
-                        @if($index < 1)
-                            @if($movie->top_section == 1)
-                                <div class="row hero-area-slide">
-                                    <div class="col-lg-6 col-md-5">
-                                        <div class="hero-area-content">
-                                            <img src="{{ asset($movie->thumbnail) }}" alt="about"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-7">
-                                        <div class="hero-area-content pr-50">
-                                            <h2>{{ $movie->name }}</h2>
-                                            <div class="review">
-                                                <div class="author-review">
-                                                    @for($i = 0;$i < $movie->rating;$i++)
-                                                        <i class="icofont icofont-star"></i>
-                                                    @endfor
 
-                                                </div>
-                                                <h4>{{ $movie->rating }} Comments</h4>
-                                            </div>
-                                            <p>{!!  substr($movie->description, 0, 200) !!}....</p>
-                                            <h3>Cast:</h3>
-                                            <div class="slide-cast">
-                                                @foreach($movie->casts as $cast)
-                                                    <div class="single-slide-cast">
-                                                        <img src="{{ $cast->image }}" alt="{{ $cast->name }}"/>
-                                                    </div>
-                                                @endforeach
-
-
-                                                <div class="single-slide-cast text-center">
-                                                    5+
-                                                </div>
-                                            </div>
-                                            <div class="slide-trailor mb-5">
-                                                <h3>Watch Trailer</h3>
-                                                <a class="theme-btn theme-btn2" href="#"><i class="icofont icofont-play"></i>
-                                                    Tickets</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                    @endforeach
-                </div>
-                <div class="thumb-next">
-                    @foreach($movies as $index => $movie)
-                        @if($index < 1)
-                        @if($movie->top_section == 1)
-                            <div class="row hero-area-slide">
-                                <div class="col-lg-6 col-md-5">
-                                    <div class="hero-area-content">
-                                        <img src="{{ asset($movie->thumbnail) }}" alt="about"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-7">
-                                    <div class="hero-area-content pr-50">
-                                        <h2>{{ $movie->name }}</h2>
-                                        <div class="review">
-                                            <div class="author-review">
-                                                @for($i = 0;$i < $movie->rating;$i++)
-                                                    <i class="icofont icofont-star"></i>
-                                                @endfor
-
-                                            </div>
-                                            <h4>{{ $movie->rating }} Comments</h4>
-                                        </div>
-                                        <p>{!!  substr($movie->description, 0, 200) !!}....</p>
-                                        <h3>Cast:</h3>
-                                        <div class="slide-cast">
-                                            @foreach($movie->casts as $cast)
-                                                <div class="single-slide-cast">
-                                                    <img src="{{ $cast->image }}" alt="{{ $cast->name }}"/>
-                                                </div>
-                                            @endforeach
-
-
-                                            <div class="single-slide-cast text-center">
-                                                5+
-                                            </div>
-                                        </div>
-                                        <div class="slide-trailor mb-5">
-                                            <h3>Watch Trailer</h3>
-                                            <a class="theme-btn theme-btn2" href="#"><i class="icofont icofont-play"></i>
-                                                Tickets</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                        @endif
-                    @endforeach
-                </div>
-            </div>
         </div>
     </section><!-- hero area end -->
     <!-- portfolio section start -->
@@ -210,9 +112,9 @@
                 </div>
                 <div class="col-lg-3 text-center text-lg-left">
                     <div class="portfolio-sidebar">
-                        <img src="{{ asset('assets/img/sidebar/sidebar1.png') }}" alt="sidebar" />
-                        <img src="{{ asset('assets/img/sidebar/sidebar2.png') }}" alt="sidebar" />
-                        <img src="{{ asset('assets/img/sidebar/sidebar3.png') }}" alt="sidebar" />
+                        <img src="{{ asset('assets/img/sidebar/sidebar1.png') }}" alt="sidebar"/>
+                        <img src="{{ asset('assets/img/sidebar/sidebar2.png') }}" alt="sidebar"/>
+                        <img src="{{ asset('assets/img/sidebar/sidebar3.png') }}" alt="sidebar"/>
                     </div>
                 </div>
             </div>
@@ -277,5 +179,5 @@
                 </div>
             </div>
         </div>
-    </section><!-- video section end -->
+    </section>
 @endsection

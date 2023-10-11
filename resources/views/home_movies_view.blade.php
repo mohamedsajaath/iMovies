@@ -41,7 +41,7 @@
                                         Writer:
                                     </div>
                                     <div class="transformers-right">
-                                        Stephen McFeely, Christopher Markus
+                                        {{ $movie[0]->writer }}
                                     </div>
                                 </li>
                                 <li>
@@ -49,7 +49,7 @@
                                         Director:
                                     </div>
                                     <div class="transformers-right">
-                                        Joe Johnston
+                                        {{ $movie[0]->director }}
                                     </div>
                                 </li>
                                 <li>
@@ -73,7 +73,7 @@
                                         Language:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->Language }}
+                                        {{ $movie[0]->language }}
                                     </div>
                                 </li>
 
