@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-area">
             <div class="logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('assets/img/logo.png') }}" alt="logo" /></a>
+                <h2><b>iMovie</b></h2>
             </div>
             <div class="header-right">
                 <form action="#" style="visibility: hidden;">
@@ -15,18 +15,18 @@
                     <button><i class="icofont icofont-search"></i></button>
                 </form>
                 <ul>
-                    <li><a href="#">Welcome Guest!</a></li>
-                    <li><a  href="{{ route('login') }}">Login</a></li>
+                    {{--<li><a href="#">Welcome Guest!</a></li>--}}
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </div>
             <div class="menu-area">
                 <div class="responsive-menu"></div>
                 <div class="mainmenu">
                     <ul id="primary-menu">
-                        <li><a class="active" href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('home') }}">Movies</a></li>
-                        <li><a href="{{ route('home') }}">Top Movies</a></li>
-                       </ul>
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('home_movies') }}">Movies</a></li>
+                        <li><a href="{{ route('home_top_movies') }}">Top Movies</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

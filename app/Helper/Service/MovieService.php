@@ -3,6 +3,7 @@
 namespace App\Helper\Service;
 
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class MovieService
 {
@@ -27,4 +28,17 @@ class MovieService
 
     }
 
+    public static function getTopMovies(){
+        return Movie::query()->orderBy('rating','asc')->get();
+    }
+
+    public static function getAllMoviesWithCasts(){
+
+        $movies = Movie::query()->get();
+        foreach ($movies as $movie) {
+            $casts = $movie->casts;
+        }
+        return $movies;
+
+    }
 }

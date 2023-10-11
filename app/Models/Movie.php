@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Movie extends Model
 {
@@ -23,6 +24,11 @@ class Movie extends Model
         'top_section',
         'coming_soon'
     ];
-    const StoragePath = "public/movie";
+    const StoragePath = "storage/movie";
 
+
+    public function casts():HasMany
+    {
+        return $this->hasMany(Cast::class);
+    }
 }

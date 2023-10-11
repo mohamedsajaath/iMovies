@@ -13,7 +13,7 @@ class CastService
         foreach ($movieRequest->cast_name as $index => $name) {
             $cast = new Cast();
             $cast->name = $name;
-            $cast->image = ImageService::create($movieRequest->cast_image[$index],"public/cast");
+            $cast->image = ImageService::create($movieRequest->cast_image[$index],"storage/cast");
             $cast->movie_id = $movieId;
             $cast->save();
         }

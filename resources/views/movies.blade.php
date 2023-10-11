@@ -22,7 +22,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Genre</th>
                         <th>Time</th>
                         <th>Link</th>
                         <th>Updated date</th>
@@ -32,7 +32,7 @@
                     <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Genre</th>
                         <th>Time</th>
                         <th>Link</th>
                         <th>Updated date</th>
@@ -45,7 +45,7 @@
 
                         <tr>
                             <td>{{ $movie->name }}</td>
-                            <td>{{ $movie->description }}</td>
+                            <td>{{ $movie->genre }}</td>
                             <td>{{ $movie->time }}</td>
                             <td><a href="{{ $movie->link }}">View</a></td>
                             <td>{{ $movie->updated_at }}</td>

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>iMovie - Online Movies</title>
     <!-- Favicon Icon -->
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favcion.png') }}" />
+{{--    <link rel="icon" type="image/png" href="{{ asset('assets/img/favcion.png') }}" />--}}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}" media="all" />
     <!-- Slick nav CSS -->
