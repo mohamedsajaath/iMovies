@@ -28,7 +28,7 @@ Route::post('/comments/create',[CommentController::class,'create'])->name('comme
 
 
 //ADMIN ROUTES
-Route::group(['prefix'=>'admin'], function(){
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function(){
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
@@ -43,7 +43,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('/comments',[CommentController::class,'index'])->name('comments');
     Route::get('/comments/update/{id}/{approval}',[CommentController::class, 'updateApproval']);
 
-})->middleware(['auth', 'verified'])->name('movies');
+});
 
 
 
