@@ -69,7 +69,12 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <iframe src="{{ route('home') }}" style="width:100%; height: 80vh;"></iframe>
+        </div>
+    </div>
+
 @endsection

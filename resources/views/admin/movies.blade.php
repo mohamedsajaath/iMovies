@@ -83,9 +83,6 @@
 
         </div>
     </div>
-    {{--Modal--}}
-    @include('modal.movie_add_modal')
-
 @endsection
 
 @push('script')

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-area">
             <div class="logo">
-                <h2><b>iMovie</b></h2>
+                <a href="{{ route('home') }}" style="text-decoration: none;"><h2><b>iMovie</b></h2></a>
             </div>
             <div class="header-right">
                 <form action="#" style="visibility: hidden;">

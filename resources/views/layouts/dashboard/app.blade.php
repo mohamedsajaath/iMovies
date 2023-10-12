@@ -12,6 +12,7 @@
             <div class="container-fluid">
                 @include('layouts.dashboard.toast')
                 @yield('content')
+                @include('modal.movie_add_modal')
             </div>
         </div>
         @include('layouts.dashboard.footer')

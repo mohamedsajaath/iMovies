@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="widget">
-                    <h2><b>iMovie</b></h2>
+                    <a href="{{ route('home') }}" style="text-decoration: none;"><h2><b>iMovie</b></h2></a>
                 </div>
             </div>
 
