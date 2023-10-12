@@ -7,8 +7,6 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Add Movie
         </button>
-
-
     </div>
 
 
@@ -47,7 +45,7 @@
                             <td>{{ $movie->name }}</td>
                             <td>{{ $movie->genre }}</td>
                             <td>{{ $movie->time }}</td>
-                            <td><a href="{{ $movie->link }}">View</a></td>
+                            <td><a href="{{ url('/admin/movies/view/'.$movie->id ) }}">View</a></td>
                             <td>{{ $movie->updated_at }}</td>
                             <td>
                                 <div class="dropdown mb-0">
@@ -85,50 +83,30 @@
 
         </div>
     </div>
-
-
     {{--Modal--}}
     @include('modal.movie_add_modal')
+
 @endsection
 
 @push('script')
     <script>
-        // VALIDATE MOVIE TIME
-        $(document).on('change', "#movie-time", function (e) {
-            const movieTimeRegex = /^(\d{2}):(\d{2}):(\d{2})$/;
-            let movieTime = $('#movie-time');
-
-            if (!movieTimeRegex.test(movieTime.val())) {
-                movieTime.css("border-color", "red")
-                movieTime.val("00:00:00")
-            } else {
-                movieTime.css("border-color", "blue")
-            }
-        });
-
-        function alertMessage(message, state) {
-            if (state == "s") {
-                $('.modal-footer').prepend(`
-                    <div class="alert alert-success" role="alert">
-                    ${message}
-                    </div>`);
-            } else {
-                $('.modal-footer').prepend(`
-                    <div class="alert alert-warning" role="alert">
-                    ${message}
-                    </div>`);
-            }
-            setTimeout(function () {
-                $('.alert').hide('slow');
-            }, 1000)
-        }
-
         $(document).ready(function () {
-            $('#dataTable').DataTable();
-        });
 
-        $(document).on('click', '.append-btn', function () {
-            $('.casts-table-body').append(` <tr>
+            // VALIDATE MOVIE TIME
+            $(document).on('change', "#movie-time", function (e) {
+                const movieTimeRegex = /^(\d{2}):(\d{2}):(\d{2})$/;
+                let movieTime = $('#movie-time');
+                if (!movieTimeRegex.test(movieTime.val())) {
+                    movieTime.css("border-color", "red")
+                    movieTime.val("00:00:00")
+                } else {
+                    movieTime.css("border-color", "blue")
+                }
+            });
+
+            // CAST APPEND
+            $(document).on('click', '.append-btn', function () {
+                $('.casts-table-body').append(` <tr>
                                 <th><input type="file" class="form-control" class="movie-cast-image" name="cast_image[]"
                                            required></th>
                                 <th><input type="text" class="form-control" class="movie-cast-name" name="cast_name[]"
@@ -142,13 +120,13 @@
                                     </a></th>
                             </tr>`);
 
-        });
+            });
 
-        $(document).on('click', '.remove-btn', function () {
-            $(this).closest('tr').remove();
-        });
+            // CAST REMOVE
+            $(document).on('click', '.remove-btn', function () {
+                $(this).closest('tr').remove();
+            });
 
-        $(document).ready(function () {
             // EDIT MOVIE MODAL
             $(document).on('click', '.edit-movie', function () {
                 let id = $(this).data('id');
@@ -181,13 +159,12 @@
                     contentType: false,
                     success: function (response) {
                         console.log("Response from server: " + response);
+                        triggerToast(response);
                         location.reload()
-                        alertMessage("Success", "s");
                     },
                     error: function (jqXHR, error) {
                         console.error(jqXHR.responseJSON.message);
-
-                        alertMessage(jqXHR.responseJSON.message, "f");
+                        triggerToast(jqXHR.responseJSON.message);
                     }
                 });
             });
@@ -203,14 +180,12 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        console.log("Response from server: " + response);
+                        triggerToast(response);
                         location.reload()
-                        alertMessage("Success", "s");
                     },
                     error: function (jqXHR, error) {
                         console.error(jqXHR.responseJSON.message);
-
-                        alertMessage(jqXHR.responseJSON.message, "f");
+                        triggerToast(jqXHR.responseJSON.message);
                     }
                 });
             });
@@ -222,21 +197,16 @@
                     type: "GET",
                     url: "{{ url('/admin/movies/delete') }}" + "/" + id,
                     success: function (response) {
-                        console.log("Response from server: " + response);
+                        triggerToast(response);
                         location.reload()
                     },
                     error: function (jqXHR, error) {
                         console.error(jqXHR.responseJSON.message);
+                        triggerToast(jqXHR.responseJSON.message);
                     }
                 });
             });
 
         });
-
-
     </script>
-    <script>
-
-    </script>
-
 @endpush

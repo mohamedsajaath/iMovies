@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,26 +25,31 @@ Route::get('/home/top-movies', [HomeController::class,'top_movies'])->name('home
 
 
 
-Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
-
-Route::get('/movies', [MovieController::class,'index'])->middleware(['auth', 'verified'])->name('movies');
+Route::get('/movies', [MovieController::class,'index'])->name('movies');
 Route::group(['prefix'=>'admin'], function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+    Route::get('/movies', [MovieController::class,'index'])->name('movies');
     Route::get('/movies/view/{id}', [MovieController::class,'getById'])->name('admin_view_movie');
-    Route::get('/movies/delete/{id}', [MovieController::class,'deleteById'])->name('admin_delete_movie');
     Route::get('/movies/modal/edit/{id}', [MovieController::class,'getEditModal'])->name('admin_edit_movie_modal');
 
+    Route::get('/movies/delete/{id}', [MovieController::class,'deleteById']);
     Route::post('/movies/edit', [MovieController::class,'editMovie'])->name('admin_edit_movie');
     Route::post('/movies/create', [MovieController::class,'createMovie'])->name('admin_create_movie');
+
+
+    Route::get('/comments',[CommentController::class,'index'])->name('comments');
+    Route::get('/comments/update/{id}/{approval}',[CommentController::class, 'updateApproval']);
+
 })->middleware(['auth', 'verified'])->name('movies');
 
 
 
-Route::get('/comments', function () {
-    return view('admin.comments');
-})->middleware(['auth', 'verified'])->name('comments');
+Route::post('/comments/create',[CommentController::class,'create'])->name('comment_create');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

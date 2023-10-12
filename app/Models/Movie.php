@@ -34,4 +34,8 @@ class Movie extends Model
     {
         return $this->hasMany(Cast::class);
     }
+    public function comments():HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

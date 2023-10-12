@@ -48,20 +48,14 @@
                                 <div class="single-portfolio">
                                     <div class="single-portfolio-img">
                                         <img src="{{ asset($movie->poster_image) }}" alt="portfolio"/>
-                                        <a href="{{ $movie->link }}" class="popup-youtube">
-                                            <i class="icofont icofont-ui-play"></i>
+                                        <a href="{{ Url('/home/movies/view/'.$movie->id) }}" class="popup-youtube">
+                                            <i class="icofont icofont-ui-browser"></i>
                                         </a>
                                     </div>
-                                    <div class="portfolio-content">
-                                        <h2>{{ $movie->name }}</h2>
-                                        <div class="review">
-                                            <div class="author-review">
-                                                @for($i = 0;$i < $movie->rating;$i++)
-                                                    <i class="icofont icofont-star"></i>
-                                                @endfor
-                                            </div>
-                                            <h4>{{ $movie->rating }} Comments</h4>
-                                        </div>
+                                    <div class="portfolio-content movie-text" >
+                                        <a href="{{ Url('/home/movies/view/'.$movie->id) }}">
+                                            <h4>{{ substr($movie->name, 0, 10) }}...</h4>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.home.app')
 
 @section('content')
-{{--    {{ dd($movie[0][0]) }}--}}
+    {{--    {{ dd($movie) }}--}}
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -12,28 +12,27 @@
                 </div>
             </div>
         </div>
-    </section><!-- breadcrumb area end -->
-    <!-- transformers area start -->
+    </section>
     <section class="transformers-area">
         <div class="container">
             <div class="transformers-box">
                 <div class="row flexbox-center">
                     <div class="col-lg-5 text-lg-left text-center">
                         <div class="transformers-content">
-                            <img src="{{ asset($movie[0]->thumbnail_image) }}" alt="about" />
+                            <img src="{{ asset($movie->thumbnail_image) }}" alt="about"/>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="transformers-content">
-                            <h2>{{ $movie[0]->name }}</h2>
-                            <p>{{ $movie[0]->genre }}</p>
+                            <h2>{{ $movie->name }}</h2>
+                            <p>{{ $movie->genre }}</p>
                             <ul>
                                 <li>
                                     <div class="transformers-left">
                                         Movie:
                                     </div>
                                     <div class="transformers-right">
-                                        <a href="#">{{ $movie[0]->name }}</a>
+                                        <a href="#">{{ $movie->name }}</a>
                                     </div>
                                 </li>
                                 <li>
@@ -41,7 +40,7 @@
                                         Writer:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->writer }}
+                                        {{ $movie->writer }}
                                     </div>
                                 </li>
                                 <li>
@@ -49,7 +48,7 @@
                                         Director:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->director }}
+                                        {{ $movie->director }}
                                     </div>
                                 </li>
                                 <li>
@@ -57,7 +56,7 @@
                                         Time:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->time }}
+                                        {{ $movie->time }}
                                     </div>
                                 </li>
                                 <li>
@@ -65,7 +64,7 @@
                                         Release:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->release }}
+                                        {{ $movie->release }}
                                     </div>
                                 </li>
                                 <li>
@@ -73,7 +72,17 @@
                                         Language:
                                     </div>
                                     <div class="transformers-right">
-                                        {{ $movie[0]->language }}
+                                        {{ $movie->language }}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="transformers-left">
+                                        Casts:
+                                    </div>
+                                    <div class="transformers-right">
+                                       @foreach($movie->casts as $cast)
+                                           {{ $cast->name }} |
+                                       @endforeach
                                     </div>
                                 </li>
 
@@ -95,8 +104,9 @@
 
             </div>
         </div>
-    </section><!-- transformers area end -->
-    <!-- details area start -->
+    </section>
+
+
     <section class="details-area">
         <div class="container">
             <div class="row">
@@ -104,29 +114,31 @@
                     <div class="details-content">
                         <div class="details-overview">
                             <h2>Description</h2>
-                            <p>{!! $movie[0]->description !!}</p>
+                            <p>{!! $movie->description !!}</p>
                         </div>
 
-                        <div class="details-comment">
-                            <a class="theme-btn theme-btn2" href="#">Josh</a>
-                            <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p>
+                        <div class="details-overview">
+                            <h2>Comments</h2>
+                            @foreach($movie->comments as $comment)
+                                @if($comment->is_approved == 1)
+                                    <div class="details-comment mb-4">
+                                        <a class="theme-btn theme-btn2" href="#">{{ $comment->name }}</a>
+                                        <p>{{ $comment->comment }}</p>
+                                    </div>
+                                @endif
+                            @endforeach
+
                         </div>
-                        <div class="details-comment">
-                            <a class="theme-btn theme-btn2" href="#">Ann</a>
-                            <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p>
-                        </div>
-                        <div class="details-comment">
-                            <a class="theme-btn theme-btn2" href="#">Malan</a>
-                            <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p>
-                        </div>
+
 
                         <div class="details-reply">
                             <h2>Comments</h2>
-                            <form action="#">
+                            <form action="{{ route('comment_create') }}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="select-container">
-                                            <input type="text" placeholder="Name"/>
+                                            <input type="text" placeholder="Name" name="name"/>
                                             <i class="icofont icofont-ui-user"></i>
                                         </div>
                                     </div>
@@ -134,12 +146,13 @@
 
                                     <div class="col-lg-8">
                                         <div class="textarea-container">
-                                            <textarea placeholder="Type Here Message"></textarea>
+                                            <textarea placeholder="Type Here Message" name="comment"></textarea>
                                             <button><i class="icofont icofont-send-mail"></i></button>
                                         </div>
                                     </div>
                                 </div>
-                                <a class="theme-btn" href="#">Comment</a>
+                                <input type="hidden" name="movie_id" value="{{ $movie->id }}"/>
+                                <button class="theme-btn" type="submit">Comment</button>
                             </form>
                         </div>
 
@@ -147,9 +160,9 @@
                 </div>
                 <div class="col-lg-3 text-center text-lg-left">
                     <div class="portfolio-sidebar">
-                        <img src="{{ asset('assets/img/sidebar/sidebar1.png') }}" alt="sidebar" />
-                        <img src="{{ asset('assets/img/sidebar/sidebar2.png') }}" alt="sidebar" />
-                        <img src="{{ asset('assets/img/sidebar/sidebar3.png') }}" alt="sidebar" />
+                        <img src="{{ asset('assets/img/sidebar/sidebar1.png') }}" alt="sidebar"/>
+                        <img src="{{ asset('assets/img/sidebar/sidebar2.png') }}" alt="sidebar"/>
+                        <img src="{{ asset('assets/img/sidebar/sidebar3.png') }}" alt="sidebar"/>
                     </div>
                 </div>
             </div>

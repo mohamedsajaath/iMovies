@@ -17,6 +17,16 @@ class MovieService
         return Movie::query()->where("id", "=", $id)->get();
     }
 
+    public static function getAllMoviesWithCastsAndCommentsById($id)
+    {
+        $movie = Movie::query()
+            ->where("movies.id", "=", $id)
+            ->first();
+        $movie->casts;
+        $movie->comments;
+        return $movie;
+    }
+
     public static function creatMovie($movieObj)
     {
         try {
@@ -33,12 +43,13 @@ class MovieService
         return Movie::query()->orderBy('rating', 'asc')->get();
     }
 
-    public static function getAllMoviesWithCasts()
+    public static function getAllMoviesWithCastsAndComments()
     {
 
         $movies = Movie::query()->get();
         foreach ($movies as $movie) {
-            $casts = $movie->casts;
+            $movie->casts;
+            $movie->comments;
         }
         return $movies;
 
@@ -62,7 +73,8 @@ class MovieService
         }
     }
 
-    public static function updateMovie($movieObj){
+    public static function updateMovie($movieObj)
+    {
 
         try {
             $movieObj->update();
@@ -72,7 +84,8 @@ class MovieService
         }
     }
 
-    public static function getAllCount(){
+    public static function getAllCount()
+    {
         return Movie::all()->count();
     }
 }

@@ -23,7 +23,7 @@
                                             @endfor
 
                                         </div>
-                                        <h4>{{ $movie->rating }} Comments</h4>
+                                        <h4>{{ Count($movie->comments) }} Comments</h4>
                                     </div>
                                     <p>{{ substr($movie->description, 0, 200) }}....</p>
                                     <h3>Cast:</h3>
@@ -80,10 +80,6 @@
                                             </div>
                                         </div>
                                         <div class="slide-trailor mb-5">
-{{--                                            <h3>Watch Trailer</h3>--}}
-{{--                                            <a class="theme-btn theme-btn2" href="#"><i--}}
-{{--                                                    class="icofont icofont-play"></i>--}}
-{{--                                                Tickets</a>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -137,8 +133,8 @@
                 </div>
             </div>
         </div>
-    </section><!-- hero area end -->
-    <!-- portfolio section start -->
+    </section>
+
     <section class="portfolio-area pt-60">
         <div class="container">
             <div class="row flexbox-center">
@@ -175,20 +171,14 @@
                                     <div class="single-portfolio">
                                         <div class="single-portfolio-img">
                                             <img src="{{ asset($movie->poster_image) }}" alt="portfolio"/>
-                                            <a href="{{ $movie->link }}" class="popup-youtube">
-                                                <i class="icofont icofont-ui-play"></i>
+                                            <a href="{{ Url('/home/movies/view/'.$movie->id) }}" class="popup-youtube">
+                                                <i class="icofont icofont-ui-browser"></i>
                                             </a>
                                         </div>
-                                        <div class="portfolio-content">
-                                            <h2>{{ $movie->name }}</h2>
-                                            <div class="review">
-                                                <div class="author-review">
-                                                    @for($i = 0;$i < $movie->rating;$i++)
-                                                        <i class="icofont icofont-star"></i>
-                                                    @endfor
-                                                </div>
-                                                <h4>{{ $movie->rating }} Comments</h4>
-                                            </div>
+                                        <div class="portfolio-content movie-text" >
+                                            <a href="{{ Url('/home/movies/view/'.$movie->id) }}">
+                                            <h4>{{ substr($movie->name, 0, 10) }}...</h4>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -205,8 +195,8 @@
                 </div>
             </div>
         </div>
-    </section><!-- portfolio section end -->
-    <!-- video section start -->
+    </section>
+
     <section class="video ptb-90">
         <div class="container">
             <div class="row">

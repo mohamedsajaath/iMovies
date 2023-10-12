@@ -10,6 +10,7 @@
         <div id="content">
             @include('layouts.dashboard.header')
             <div class="container-fluid">
+                @include('layouts.dashboard.toast')
                 @yield('content')
             </div>
         </div>

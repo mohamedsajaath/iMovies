@@ -36,7 +36,7 @@
                         <div class="form-group w-50">
                             <label for="message-text" class="col-form-label">Duration:<sup
                                     class="text-danger">*</sup></label>
-                            <input type="text" class="form-control" id="movie-time" name="time" value="00:00"
+                            <input type="text" class="form-control" id="movie-time" name="time" value="00:00:00"
                                    required>
                         </div>
                     </div>

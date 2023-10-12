@@ -1299,3 +1299,10 @@ hr {
 /*--------------------------------------
 --------- Pre Loader Style END ---------
 ---------------------------------------*/
+
+
+.movie-text{
+    position: absolute;
+    margin-top: -10%;
+    text-align: center;
+}
