@@ -29,13 +29,8 @@ class MovieService
 
     public static function creatMovie($movieObj)
     {
-        try {
-            $movieObj->save();
-            return ["success", $movieObj->id];
-        } catch (\Exception $err) {
-            return ["error", $err];
-        }
-
+        $movieObj->save();
+        return $movieObj->id;
     }
 
     public static function getTopMovies()
@@ -67,21 +62,16 @@ class MovieService
     {
         try {
             Movie::query()->where("id", "=", $id)->delete();
-            return ["success"];
+            return "success";
         } catch (\Exception $err) {
-            return ["error", $err];
+            return $err->getMessage();
         }
     }
 
     public static function updateMovie($movieObj)
     {
-
-        try {
-            $movieObj->update();
-            return ["success", $movieObj->id];
-        } catch (\Exception $err) {
-            return ["error", $err];
-        }
+        $movieObj->update();
+        return $movieObj->id;
     }
 
     public static function getAllCount()

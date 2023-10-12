@@ -22,19 +22,16 @@ class MovieController extends Controller
         return view('pages.admin.movie_view')->with(["movie" => $movie]);
     }
 
-    public function createMovie(MovieRequest $movieRequest)
+    public function create(MovieRequest $movieRequest)
     {
         $movieObj = MovieDTO::getFromWebForm($movieRequest);
         $response = MovieService::creatMovie($movieObj);
-
-        CastController::create($movieRequest, $response[1]);
-        return ["response" => $response];
+        return CastController::create($movieRequest, $response);
     }
 
-    public function deleteById($id)
+    public function destroy($id)
     {
-        $response = MovieService::deleteById($id);
-        return ["response" => $response];
+        return MovieService::deleteById($id);
     }
 
     public function getEditModal($id)
@@ -43,13 +40,11 @@ class MovieController extends Controller
         return view("modal.movie_edit_modal")->with(['movie' => $movie]);
     }
 
-    public function editMovie(MovieRequest $movieRequest)
+    public function update(MovieRequest $movieRequest)
     {
         $movieObj = MovieDTO::getFromWebForm($movieRequest);
         MovieService::updateMovie($movieObj);
-
-        $response = CastController::update($movieRequest, $movieRequest->id);
-        return ["response" => $response];
+        return CastController::update($movieRequest, $movieRequest->id);
     }
 }
 
